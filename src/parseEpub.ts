@@ -1,4 +1,4 @@
-import fs from 'fs'
+// import fs from 'fs'
 import xml2js from 'xml2js'
 import _ from 'lodash'
 // @ts-ignore
@@ -271,8 +271,9 @@ export default function parserWrapper(target: string | Buffer, options: ParserOp
   // but it can use options to define the target type
   const { type, expand } = options
   let _target = target
-  if (type === 'path' || (typeof target === 'string' && fs.existsSync(target))) {
-    _target = fs.readFileSync(target as string, 'binary')
+  if (type === 'path' || (typeof target === 'string')) {
+    // _target = fs.readFileSync(target as string, 'binary')
+    throw new Error("file paths are no longer supported.")
   }
   return new Epub(_target as Buffer).parse(expand)
 }
